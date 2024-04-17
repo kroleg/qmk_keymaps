@@ -118,7 +118,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     } else {  // on release of KC_BSPC
 
-        uprintf("KL: kc: 0x%04X, col: %u, row: %u, pressed: %b, time: %u, interrupt: %b, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+        uprintf("KL: kc: 0x%04X, col: %u, row: %u, pressed: %i, time: %u, interrupt: %i, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
 
         // In case KC_DEL is still being sent even after the release of KC_BSPC
         if (cmdm_registered) {
