@@ -282,3 +282,12 @@ uprintf("layer: %u\n", state);
 void matrix_init_user(void) {
     bootmagic();
 }
+
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case SFT_SPC:
+            return 50;
+        default:
+            return QUICK_TAP_TERM;
+    }
+}
