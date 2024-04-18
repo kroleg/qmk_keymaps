@@ -12,9 +12,6 @@
 #define MASTER_RIGHT
 // #define EE_HANDS
 
-// TODO what is this?
-#define USE_SERIAL_PD2
-
 /* TODO check if *_HOLD still needed https://docs.qmk.fm/#/breaking_changes
  this was last built on 0.14.6 */
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
