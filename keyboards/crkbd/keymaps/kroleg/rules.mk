@@ -7,3 +7,5 @@ LTO_ENABLE = yes
 MOUSEKEY_ENABLE = no
 OLED_ENABLE = no
 ENCODER_ENABLE = no
+# https://docs.qmk.fm/#/feature_caps_word
+CAPS_WORD_ENABLE = yes
