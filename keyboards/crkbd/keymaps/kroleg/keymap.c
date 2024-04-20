@@ -31,6 +31,8 @@ enum layer_number {
 #define HOME_I LALT_T(KC_I)
 #define HOME_O RCTL_T(KC_O)
 
+#define LED_PIN D5
+
 // thumbs
 #define SFT_SPC LSFT_T(KC_SPC)
 
@@ -135,6 +137,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     static bool cmd_switched_to_colemak;
     static bool alt_kc_registered;
+
+    gpio_set_pin_output(LED_PIN);
+    bool pinstate = gpio_read_pin(LED_PIN);
+    uprintf("pinstate: %i\n", pinstate);
 
     switch (keycode) {
     // because we switch layer to colemak whe QH_J/QH_F is held we need to handle "release" on HOME_N
@@ -247,8 +253,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             unregister_code(KC_SPC);
             unregister_code(KC_LCTL);
             if (biton32(default_layer_state) == _COLEMAK) {
+                gpio_write_pin(LED_PIN, 1);
                 set_single_persistent_default_layer(_QWERTY);
             } else {
+                gpio_write_pin(LED_PIN, 0);
                 set_single_persistent_default_layer(_COLEMAK);
             }
         }
