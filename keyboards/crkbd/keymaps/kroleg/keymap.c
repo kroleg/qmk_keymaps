@@ -286,7 +286,7 @@ void matrix_init_user(void) {
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case SFT_SPC:
-            return 50;
+            return 0;
         default:
             return QUICK_TAP_TERM;
     }
