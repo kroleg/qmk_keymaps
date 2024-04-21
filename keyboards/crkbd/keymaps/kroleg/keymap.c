@@ -123,7 +123,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     } else {  // on release of KC_BSPC
 
-        uprintf("KL: kc: 0x%04X, col: %u, row: %u, pressed: %i, time: %u, interrupt: %i, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+        // uprintf("KL: kc: 0x%04X, col: %u, row: %u, pressed: %i, time: %u, interrupt: %i, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
 
         // In case KC_DEL is still being sent even after the release of KC_BSPC
         if (cmdm_registered) {
@@ -143,7 +143,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     gpio_set_pin_output(LED_PIN);
     bool pinstate = gpio_read_pin(LED_PIN);
-    uprintf("pinstate: %i\n", pinstate);
 
     switch (keycode) {
     // because we switch layer to colemak whe QH_J/QH_F is held we need to handle "release" on HOME_N
@@ -279,7 +278,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-uprintf("layer: %u\n", state);
     if (in_cmd_tab) {
         unregister_code(KC_LGUI);
         in_cmd_tab = false;
