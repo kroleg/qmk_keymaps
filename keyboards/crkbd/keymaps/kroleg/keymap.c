@@ -294,6 +294,10 @@ void matrix_init_user(void) {
     bootmagic();
 }
 
+void keyboard_post_init_user(void) {
+    set_single_persistent_default_layer(_COLEMAK);
+}
+
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case SFT_SPC:
