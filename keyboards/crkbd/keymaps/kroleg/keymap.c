@@ -39,7 +39,8 @@ enum layer_number {
 #define SFT_SPC LSFT_T(KC_SPC)
 
 enum custom_keycodes {
-    QMKBEST = SAFE_RANGE,
+    // switch EN/RU on mac switching colemak/qwerty at the same time
+    SW_LANG = SAFE_RANGE,
     CMDTAB,
 };
 
@@ -75,13 +76,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		                  KC_NO,   MO(_SYM), _______,     _______, _______, KC_NO
 	),
     [_THIRD] = LAYOUT_split_3x5_3(
-		QMKBEST, KC_NO, KC_NO, KC_NO, KC_NO,        KC_VOLD, KC_VOLU, KC_NO,   KC_NO,  KC_NO,
+		SW_LANG, KC_NO, KC_NO, KC_NO, KC_NO,        KC_VOLD, KC_VOLU, KC_NO,   KC_NO,  KC_NO,
 		KC_NO,   KC_NO, KC_NO, KC_F13, KC_NO,       KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,
 		KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,        KC_NO,   KC_NO,  KC_NO, KC_NO, KC_NO,
 		                KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO
 	),
     [_THIRD_DUPE] = LAYOUT_split_3x5_3(
-		QMKBEST, KC_NO, KC_NO, KC_NO, KC_NO,        KC_VOLD, KC_VOLU, KC_NO,   KC_NO,  KC_NO,
+		SW_LANG, KC_NO, KC_NO, KC_NO, KC_NO,        KC_VOLD, KC_VOLU, KC_NO,   KC_NO,  KC_NO,
 		KC_NO,   KC_NO, KC_NO, KC_F13, KC_NO,       KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,
 		KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,        KC_NO,   KC_NO,  KC_NO, KC_NO, KC_NO,
 		                KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO
@@ -244,12 +245,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         break;
 
-    case QMKBEST:
+    case SW_LANG:
         if (record->event.pressed) {
-            // when keycode QMKBEST is pressed
+            // when keycode SW_LANG is pressed
             // SEND_STRING("QMK is the best thing ever!");
         } else {
-            // when keycode QMKBEST is released
+            // when keycode SW_LANG is released
             register_code(KC_LCTL);
             register_code(KC_SPC);
             unregister_code(KC_SPC);
