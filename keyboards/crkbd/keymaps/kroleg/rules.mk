@@ -7,6 +7,7 @@ LTO_ENABLE = yes
 MOUSEKEY_ENABLE = no
 OLED_ENABLE = no
 ENCODER_ENABLE = no
+COMBO_ENABLE = yes
 # https://docs.qmk.fm/#/feature_caps_word
 CAPS_WORD_ENABLE = yes
 # i use promicro rp2040 same as https://mechboards.co.uk/products/pro-micro-5v (see pro-micro-rp2040-pinout.webp)

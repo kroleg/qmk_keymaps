@@ -88,6 +88,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	)
 };
 
+/*
+ * combos to make it easier to use homerow mods
+ */
+const uint16_t PROGMEM cmd_shift_i[] = {HOME_S, HOME_T, HOME_I, COMBO_END};
+const uint16_t PROGMEM cmd_shift_e[] = {HOME_S, HOME_T, HOME_E, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(cmd_shift_i, LSFT(LGUI(KC_I))),
+    COMBO(cmd_shift_e, LSFT(LGUI(KC_E))),
+};
+/* end of combos */
+
 // Initialize variable holding the binary
 // representation of active modifiers.
 uint8_t mod_state;

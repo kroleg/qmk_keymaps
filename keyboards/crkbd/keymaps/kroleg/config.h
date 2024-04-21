@@ -18,7 +18,7 @@
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0
 // Apply the modifier on keys that are tapped during a short hold of a modtap.
-#define PERMISSIVE_HOLD
+// #define PERMISSIVE_HOLD // -> disabled because it doesn't work well with my home row combos
 
 // todo
 // - HOLD_ON_OTHER_KEY_PRESS -> https://docs.qmk.fm/#/ChangeLog/20230226?id=i-m-t-i
