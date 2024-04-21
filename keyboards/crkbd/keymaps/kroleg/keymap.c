@@ -2,6 +2,8 @@
 
 #include "print.h"
 
+#define QUICK_TAP_TERM_PER_KEY
+
 enum layer_number {
     _QWERTY = 0,
     _COLEMAK,
