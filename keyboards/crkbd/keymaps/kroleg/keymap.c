@@ -141,9 +141,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static bool cmd_switched_to_colemak;
     static bool alt_kc_registered;
 
-    gpio_set_pin_output(LED_PIN);
-    bool pinstate = gpio_read_pin(LED_PIN);
-
     switch (keycode) {
     // because we switch layer to colemak whe QH_J/QH_F is held we need to handle "release" on HOME_N
     case HOME_N:
@@ -294,6 +291,7 @@ void matrix_init_user(void) {
 
 void keyboard_post_init_user(void) {
     set_single_persistent_default_layer(_COLEMAK);
+    gpio_set_pin_output(LED_PIN);
 }
 
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
