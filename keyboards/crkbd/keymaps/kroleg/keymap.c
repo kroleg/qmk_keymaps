@@ -9,7 +9,7 @@ enum layer_number {
     _SYM_RU,
     _NAV,
     _THIRD,
-    _THIRD_DUPE
+    _THIRD_RU
 };
 
 // home row mods for qwerty
@@ -33,8 +33,9 @@ enum layer_number {
 
 #define LED_PIN D5
 
-// thumbs
+// short names to fit in keymap table
 #define SFT_SPC LSFT_T(KC_SPC)
+#define SFT_TAB LSFT(KC_TAB)
 
 enum custom_keycodes {
     // switch EN/RU on mac switching colemak/qwerty at the same time
@@ -46,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_QWERTY] = LAYOUT_split_3x5_3(
 		KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_LBRC, KC_P,
 		HOME_A,  QH_S,    QH_D,    QH_F,    KC_G,        KC_H,    QH_J,    QH_K,    QH_L,    QH_SCLN,
-		KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_NO,
+		KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M,    KC_COMM, KC_DOT,  XXXXXXX,
                           KC_TAB,  MO(_SYM_RU), KC_ENT,  SFT_SPC, MO(_NAV), OSM(MOD_HYPR)
 	),
     [_COLEMAK] = LAYOUT_split_3x5_3(
@@ -56,34 +57,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           _______, MO(_SYM), _______,    _______, MO(_NAV), _______
 	),
 	[_SYM] = LAYOUT_split_3x5_3(
-		KC_AMPR,KC_PERC, KC_ASTR,  KC_LCBR, KC_RCBR,     KC_LT,   KC_GT,   KC_TILD, KC_CIRC, KC_HASH,
-		KC_ESC, KC_UNDS, KC_EQL,   KC_LBRC, KC_RBRC,     KC_DQUO, KC_QUOT, KC_COLN, KC_SLSH, KC_QUES,
-		KC_AT,  KC_MINS, KC_PLUS,  KC_LPRN, KC_RPRN,     KC_DLR,  KC_GRAVE,KC_SCLN, KC_PIPE, KC_BSLS,
-		                  KC_NO,   _______, _______,     KC_SPC,  _______, _______
+		KC_AMPR, KC_PERC, KC_ASTR, KC_LCBR, KC_RCBR,     KC_LT,   KC_GT,   KC_TILD, KC_CIRC, KC_HASH,
+		KC_ESC,  KC_UNDS, KC_EQL,  KC_LBRC, KC_RBRC,     KC_DQUO, KC_QUOT, KC_COLN, KC_SLSH, KC_QUES,
+		KC_AT,   KC_MINS, KC_PLUS, KC_LPRN, KC_RPRN,     KC_DLR,  KC_GRAVE,KC_SCLN, KC_PIPE, KC_BSLS,
+		                  _______, XXXXXXX, _______,     KC_SPC,  _______, _______
 	),
     [_SYM_RU] = LAYOUT_split_3x5_3(
-		_______, _______, _______,  _______, _______,    KC_NO,   KC_NO,   _______, _______, _______,
-		_______, _______, _______,  _______, _______,    KC_AT,   KC_GT,   KC_LT,   _______, _______,
-		_______, _______, _______,  _______, _______,    _______, _______, _______, _______, _______,
-		                  KC_NO,    _______, _______,    _______, _______, _______
+		_______, _______, _______, _______, _______,     XXXXXXX, XXXXXXX, _______, _______, _______,
+		_______, _______, _______, _______, _______,     KC_AT,   KC_GT,   KC_LT,   _______, _______,
+		_______, _______, _______, _______, _______,     _______, _______, _______, _______, _______,
+		                  _______, XXXXXXX, _______,     _______, _______, _______
 	),
 	[_NAV] = LAYOUT_split_3x5_3(
-		KC_DOT,  KC_4,    KC_3,    KC_2,    KC_1,        KC_NO,   KC_HOME, KC_UP,   KC_END,  KC_NO,
+		KC_DOT,  KC_4,    KC_3,    KC_2,    KC_1,        XXXXXXX, KC_HOME, KC_UP,   KC_END,  XXXXXXX,
 		KC_LCTL, KC_LALT, KC_LSFT, KC_LGUI, KC_0,        CMDTAB,  KC_LEFT, KC_DOWN, KC_RGHT, KC_ESC,
-		KC_9,    KC_8,    KC_7,    KC_6,    KC_5,        KC_NO,   LSFT(KC_TAB),  KC_BSPC, KC_TAB, _______,
-		                  KC_NO,   MO(_SYM), _______,     _______, _______, KC_NO
+		KC_9,    KC_8,    KC_7,    KC_6,    KC_5,        XXXXXXX, SFT_TAB, KC_BSPC, KC_TAB,  XXXXXXX,
+		                  _______, _______, _______,     _______, XXXXXXX, _______
 	),
     [_THIRD] = LAYOUT_split_3x5_3(
-		SW_LANG, KC_NO, KC_NO, KC_NO, KC_NO,        KC_VOLD, KC_VOLU, KC_NO,   KC_NO,  QK_BOOT,
-		KC_NO,   KC_NO, KC_NO, KC_F13, KC_NO,       KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,
-		KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,        KC_NO,   KC_NO,  KC_NO, KC_NO, KC_NO,
-		                KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO
+		SW_LANG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, QK_BOOT,
+		XXXXXXX, XXXXXXX, XXXXXXX, KC_F13,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+		                  XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX
 	),
-    [_THIRD_DUPE] = LAYOUT_split_3x5_3(
-		SW_LANG, KC_NO, KC_NO, KC_NO, KC_NO,        KC_VOLD, KC_VOLU, KC_NO,   KC_NO,  KC_NO,
-		KC_NO,   KC_NO, KC_NO, KC_F13, KC_NO,       KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,
-		KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,        KC_NO,   KC_NO,  KC_NO, KC_NO, KC_NO,
-		                KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO
+    [_THIRD_RU] = LAYOUT_split_3x5_3(
+		_______, _______, _______, _______, _______,     _______, _______, _______, _______, _______,
+		_______, _______, _______, _______, _______,     _______, _______, _______, _______, _______,
+		_______, _______, _______, _______, _______,     _______, _______, _______, _______, _______,
+		                  _______, _______, _______,     _______, _______, _______
 	)
 };
 
@@ -278,7 +279,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         in_cmd_tab = false;
     }
     state = update_tri_layer_state(state, _SYM, _NAV, _THIRD);
-    state = update_tri_layer_state(state, _SYM_RU, _NAV, _THIRD_DUPE);
+    // can't point to _THIRD, so created transparent layer -> todo check if it was fixed
+    state = update_tri_layer_state(state, _SYM_RU, _NAV, _THIRD_RU);
     return state;
 }
 
