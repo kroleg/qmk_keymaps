@@ -295,11 +295,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 
-
-void matrix_init_user(void) {
-    bootmagic();
-}
-
 void keyboard_post_init_user(void) {
     set_single_persistent_default_layer(_COLEMAK);
     gpio_set_pin_output(LED_PIN);
