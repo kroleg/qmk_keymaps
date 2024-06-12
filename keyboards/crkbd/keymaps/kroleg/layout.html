@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        #main {
+            width: 500px;
+            margin: 100px auto;
+        }
+        .layer {
+            margin-top: 50px;
+        }
+        .layer .name {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        .keymap{
+            display: grid;
+            grid-template-columns: repeat(11, 1fr); /* 6 columns * 2 plus 1 for gap */
+            grid-template-rows: repeat(4, 1fr);
+            grid-column-gap: 5px;
+            grid-row-gap: 5px;
+        }
+        .key {
+            width: 30px;
+            height: 30px;
+            border: 1px solid rgb(210, 210, 210);
+            border-radius: 5px;
+            text-align: center;
+            vertical-align: middle;
+            /* Use a flexbox layout */
+            display: flex;
+
+            /* Make a horizontal flexbox (the default) */
+            flex-direction: row;
+
+            /* The important part: vertically center the items */
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        const ___ = 'NO_KEY'
+        const _____ = 'LEFT_RIGHT_GAP'
+        const layers = {
+            qwerty: [
+                ['q', 'w', 'e', 'r', 't', _____, 'y', 'u', 'i', 'o', 'p'],
+                ['a', 's', 'd', 'f', 'g', _____, 'h', 'j', 'k', 'l', ':'],
+                ['z', 'x', 'c', 'v', 'b', _____, 'n', 'm', '<', '>', '?'],
+                [___, ___, '⇥', 'sym', '↩️', _____, 'space', 'nav', '', ___, ___],
+            ],
+            nav: [
+                ['.', '4', '3', '2', '1', _____, '', '', '↑', '', ''],
+                ['^', '⌥', '⇧', '⌘', '0', _____, '', '←', '↓', '→', ''],
+                ['9', '8', '7', '6', '5', _____, '', '⇤', '⌫', '⇥', ''],
+                [___, ___, '', '', '', _____, '', '', '', ___, ___],
+            ],
+            sym: [
+                ['&', '%', '*', '{', '}', _____, '<', '>', '~', '^', '#'],
+                ['esc', '_', '=', '[', ']', _____, '"', "'", ':', '/', '?'],
+                ['@', '-', '+', '(', ')', _____, '$', '`', ';', '|', '\\'],
+                [___, ___, '', '', '', _____, '', '', '', ___, ___],
+            ],
+        }
+        function render(){
+            Object.entries(layers).forEach(([name, rows]) => {
+                const layerDiv = document.createElement("div");
+                layerDiv.className = 'layer'
+                document.getElementById("main").appendChild(layerDiv);
+
+                const layerNameDiv = document.createElement("div");
+                layerNameDiv.className = 'name'
+                layerNameDiv.innerText = name
+                layerDiv.appendChild(layerNameDiv)
+
+                const layerKeymapDiv = document.createElement("div");
+                layerKeymapDiv.className = 'keymap'
+                layerDiv.appendChild(layerKeymapDiv)
+
+                rows.forEach(row => {
+                    row.forEach(key => {
+                        let keyDiv = document.createElement("div");
+                        const classes = ['cell']
+                        if (key === 'NO_KEY') {
+                            classes.push('no-key')
+                        } else if (key === 'LEFT_RIGHT_GAP') {
+                            classes.push('gap')
+                        } else {
+                            keyDiv.innerText = key
+                            classes.push('key')
+                        }
+                        keyDiv.className = classes.join(' ')
+                        layerKeymapDiv.appendChild(keyDiv)
+                    })
+                })
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            render()
+        });
+
+    </script>
+    <div id="main"></div>
+</body>
+</html>
