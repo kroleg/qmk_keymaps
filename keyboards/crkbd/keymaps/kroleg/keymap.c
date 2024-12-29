@@ -154,7 +154,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             uprintf("release HOME_N, %i\n", cmd_switched_to_colemak);
         }
         if (!record->event.pressed && cmd_switched_to_colemak) {
-            cmd_switched_to_colemak = true;
+            cmd_switched_to_colemak = false;
             layer_off(_COLEMAK);
         }
         return true; // this allows normal processing
@@ -170,6 +170,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             cmd_switched_to_colemak = true;
             layer_on(_COLEMAK);
             return true; // true so GUI mod will still be applied (because that's what QH_J does)
+        } else if (cmd_switched_to_colemak && !record->event.pressed) {
+            uprintf("release QHF\n");
+            cmd_switched_to_colemak = false;
+            layer_off(_COLEMAK);
+            return true; // this allows normal processing on key release
         }
         return true; // this allows normal processing on key release
         break;
