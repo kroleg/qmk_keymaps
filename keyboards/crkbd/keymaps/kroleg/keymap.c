@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		                  _______, MO(_SYM),_______,     _______, _______, _______
 	),
     [_THIRD] = LAYOUT_split_3x5_3(
-		SW_LANG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, QK_BOOT,
+		SW_LANG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     KC_VOLD, KC_VOLU, XXXXXXX, DB_TOGG, QK_BOOT,
 		XXXXXXX, XXXXXXX, XXXXXXX, KC_F13,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		                  XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX
@@ -114,6 +114,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     static bool cmdm_registered;
     if (record->event.pressed) {
+        uprintf("press keycode: 0x%04X, col: %u, row: %u, time: %u, interrupt: %i, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.time, record->tap.interrupted, record->tap.count);
+
         if (keycode == KC_M && mod_state & MOD_MASK_GUI) {
             del_mods(MOD_MASK_GUI);
             register_code(KC_M);
@@ -127,7 +129,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     } else {  // on release of KC_BSPC
 
-        // uprintf("KL: kc: 0x%04X, col: %u, row: %u, pressed: %i, time: %u, interrupt: %i, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+        uprintf("release keycode: 0x%04X, col: %u, row: %u, time: %u, interrupt: %i, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.time, record->tap.interrupted, record->tap.count);
 
         // In case KC_DEL is still being sent even after the release of KC_BSPC
         if (cmdm_registered) {
@@ -148,6 +150,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
     // because we switch layer to colemak whe QH_J/QH_F is held we need to handle "release" on HOME_N
     case HOME_N:
+        if (!record->event.pressed){
+            uprintf("release HOME_N, %i\n", cmd_switched_to_colemak);
+        }
         if (!record->event.pressed && cmd_switched_to_colemak) {
             cmd_switched_to_colemak = true;
             layer_off(_COLEMAK);
@@ -157,9 +162,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case QH_F:
     case QH_J:
         if (record->tap.count && record->event.pressed) {
+            uprintf("tap QH_F or J\n");
             return true; // for normal processing of tap
             break;
         } else if (record->event.pressed) {
+            uprintf("hold (press) QHF\n");
             cmd_switched_to_colemak = true;
             layer_on(_COLEMAK);
             return true; // true so GUI mod will still be applied (because that's what QH_J does)
@@ -298,6 +305,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 void keyboard_post_init_user(void) {
     set_single_persistent_default_layer(_COLEMAK);
     gpio_set_pin_output(LED_PIN);
+    // debug_matrix=true;
+    debug_keyboard=true;
 }
 
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
