@@ -36,9 +36,7 @@ enum layer_number {
 // short names to fit in keymap table
 #define SFT_SPC LSFT_T(KC_SPC)
 #define SFT_TAB LSFT(KC_TAB)
-#define RU_AMPR LSFT(KC_7)
-#define RU_PERC LSFT(KC_5)
-#define RU_ASTR LSFT(KC_8)
+#define RU_QUES LSFT(KC_7)
 
 enum custom_keycodes {
     // switch EN/RU on mac switching colemak/qwerty at the same time
@@ -66,9 +64,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		                  _______, _______, _______,     KC_SPC,  MO(_NAV), _______
 	),
     [_SYM_RU] = LAYOUT_split_3x5_3(
-		RU_AMPR, RU_PERC, RU_ASTR, KC_COMM, KC_DOT,      XXXXXXX, XXXXXXX, _______, _______, _______,
-		KC_ESC,  _______, _______, _______, _______,     KC_AT,   KC_GT,   KC_LT,   _______, _______,
-		_______, _______, _______, _______, _______,     _______, _______, _______, _______, _______,
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+		KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     KC_AT,   KC_GT,   KC_LT,   XXXXXXX, RU_QUES,
+		XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		                  _______, _______, _______,     _______, MO(_NAV), _______
 	),
 	[_NAV] = LAYOUT_split_3x5_3(
