@@ -269,8 +269,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
 
     case SW_LANG:
-        if (!record->event.pressed) {
+        if (record->event.pressed) {
+            // when keycode SW_LANG is pressed
+            register_code(KC_LCTL);
+            register_code(KC_SPC);
+        } else {
             // when keycode SW_LANG is released
+            unregister_code(KC_SPC);
+            unregister_code(KC_LCTL);
             if (biton32(default_layer_state) == _COLEMAK) {
                 gpio_write_pin(LED_PIN, 1);
                 set_single_persistent_default_layer(_QWERTY);
@@ -278,11 +284,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 gpio_write_pin(LED_PIN, 0);
                 set_single_persistent_default_layer(_COLEMAK);
             }
-            register_code(KC_LCTL);
-            print("spc with delay 50ms\n");
-            tap_code(KC_SPC);
-            print("unregister_code lctl");
-            unregister_code(KC_LCTL);
         }
         break;
     case CMDTAB:
