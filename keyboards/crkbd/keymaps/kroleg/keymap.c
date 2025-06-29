@@ -57,25 +57,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,    KC_L,    KC_U,    KC_Y,    XXXXXXX,
 		HOME_A,  HOME_R,  HOME_S,  HOME_T,  KC_G,        KC_M,    HOME_N,  HOME_E,  HOME_I,  HOME_O,
 		KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,        KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_EXLM,
-                          _______, MO(_SYM), _______,    _______, MO(_NAV), _______
+                          _______, MO(_SYM), _______,    _______,  _______, _______
 	),
 	[_SYM] = LAYOUT_split_3x5_3(
 		KC_AMPR, KC_PERC, KC_ASTR, KC_LCBR, KC_RCBR,     KC_LT,   KC_GT,   KC_TILD, KC_CIRC, KC_HASH,
 		KC_ESC,  KC_UNDS, KC_EQL,  KC_LBRC, KC_RBRC,     KC_DQUO, KC_QUOT, KC_COLN, KC_SLSH, KC_QUES,
 		KC_AT,   KC_MINS, KC_PLUS, KC_LPRN, KC_RPRN,     KC_DLR,  KC_GRAVE,KC_SCLN, KC_PIPE, KC_BSLS,
-		                  _______, _______, _______,     KC_SPC,  MO(_NAV), _______
+		                  _______, _______, _______,     KC_SPC,  _______, _______
 	),
     [_SYM_RU] = LAYOUT_split_3x5_3(
 		XXXXXXX, KC_PERC, KC_ASTR, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		KC_ESC,  KC_UNDS, KC_EQL,  RU_LBRC, RU_RBRC,     KC_AT,   KC_GT,   KC_LT,   XXXXXXX, RU_QUES,
 		XXXXXXX, KC_MINS, KC_PLUS, KC_LPRN, KC_RPRN,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-		                  _______, _______, _______,     _______, MO(_NAV), _______
+		                  _______, _______, _______,     _______, _______, _______
 	),
 	[_NAV] = LAYOUT_split_3x5_3(
 		KC_DOT,  KC_4,    KC_3,    KC_2,    KC_1,        XXXXXXX, KC_HOME, KC_UP,   KC_END,  XXXXXXX,
 		KC_LCTL, KC_LALT, KC_LSFT, KC_LGUI, KC_0,        CMDTAB,  KC_LEFT, KC_DOWN, KC_RGHT, KC_ESC,
 		KC_9,    KC_8,    KC_7,    KC_6,    KC_5,        XXXXXXX, SFT_TAB, KC_BSPC, KC_TAB,  XXXXXXX,
-		                  _______, MO(_SYM),_______,     _______, _______, _______
+		                  _______, _______, _______,     _______, _______, _______
 	),
     [_THIRD] = LAYOUT_split_3x5_3(
 		SW_LANG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     KC_VOLD, KC_VOLU, XXXXXXX, DB_TOGG, QK_BOOT,
