@@ -1,0 +1,68 @@
+{
+    "maintainer": "foostan",
+    "manufacturer": "foostan",
+    "url": "https://github.com/foostan/crkbd",
+    "usb": {
+        "vid": "0x4653",
+        "device_version": "1.0.0",
+        "pid": "0x0104"
+    },
+    "build": {
+        "lto": true
+    },
+    "features": {
+        "bootmagic": true,
+        "extrakey": true,
+        "nkro": true,
+        "oled": false,
+        "mousekey": false,
+        "encoder": false,
+        "rgb_matrix": false,
+        "rgblight": true
+    },
+    "rgblight": {
+        "led_count": 1
+    },
+    "rgb_matrix": {
+        "enable": false,
+        "led_count": 0,
+        "split_count": [
+            0,
+            0
+        ]
+    },
+    "ws2812": {
+        "driver": "vendor",
+        "pin": "GP16"
+    },
+    "matrix_pins": {
+        "cols": [
+            "GP29",
+            "GP28",
+            "GP27",
+            "GP26",
+            "GP15",
+            "GP14"
+        ],
+        "rows": [
+            "GP4",
+            "GP5",
+            "GP6",
+            "GP7"
+        ]
+    },
+    "diode_direction": "COL2ROW",
+    "split": {
+        "serial": {
+            "driver": "vendor",
+            "pin": "GP1"
+        },
+        "transport": {
+            "sync": {
+                "matrix_state": true
+            }
+        }
+    },
+    "processor": "RP2040",
+    "bootloader": "rp2040"
+}

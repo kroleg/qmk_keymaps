@@ -31,7 +31,7 @@ enum layer_number {
 #define HOME_I LALT_T(KC_I)
 #define HOME_O RCTL_T(KC_O)
 
-#define LED_PIN D5
+// #define LED_PIN D5
 
 // short names to fit in keymap table
 #define SFT_SPC LSFT_T(KC_SPC)
@@ -63,19 +63,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_AMPR, KC_PERC, KC_ASTR, KC_LCBR, KC_RCBR,     KC_LT,   KC_GT,   KC_TILD, KC_CIRC, KC_HASH,
 		KC_ESC,  KC_UNDS, KC_EQL,  KC_LBRC, KC_RBRC,     KC_DQUO, KC_QUOT, KC_COLN, KC_SLSH, KC_QUES,
 		KC_AT,   KC_MINS, KC_PLUS, KC_LPRN, KC_RPRN,     KC_DLR,  KC_GRAVE,KC_SCLN, KC_PIPE, KC_BSLS,
-		                  _______, _______, _______,     KC_SPC,  MO(_NAV), _______
+		                  _______, _______, _______,     KC_SPC,  _______, _______
 	),
     [_SYM_RU] = LAYOUT_split_3x5_3(
 		XXXXXXX, KC_PERC, KC_ASTR, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 		KC_ESC,  KC_UNDS, KC_EQL,  RU_LBRC, RU_RBRC,     KC_AT,   KC_GT,   KC_LT,   XXXXXXX, RU_QUES,
 		XXXXXXX, KC_MINS, KC_PLUS, KC_LPRN, KC_RPRN,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-		                  _______, _______, _______,     _______, MO(_NAV), _______
+		                  _______, _______, _______,     _______, _______, _______
 	),
 	[_NAV] = LAYOUT_split_3x5_3(
 		KC_DOT,  KC_4,    KC_3,    KC_2,    KC_1,        XXXXXXX, KC_HOME, KC_UP,   KC_END,  XXXXXXX,
 		KC_LCTL, KC_LALT, KC_LSFT, KC_LGUI, KC_0,        CMDTAB,  KC_LEFT, KC_DOWN, KC_RGHT, KC_ESC,
 		KC_9,    KC_8,    KC_7,    KC_6,    KC_5,        XXXXXXX, SFT_TAB, KC_BSPC, KC_TAB,  XXXXXXX,
-		                  _______, MO(_SYM),_______,     _______, _______, _______
+		                  _______, _______, _______,     _______, _______, _______
 	),
     [_THIRD] = LAYOUT_split_3x5_3(
 		SW_LANG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     KC_VOLD, KC_VOLU, XXXXXXX, DB_TOGG, QK_BOOT,
@@ -96,11 +96,11 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
 /*
  * combos to make it easier to use homerow mods
  */
-const uint16_t PROGMEM cmd_shift_i[] = {HOME_S, HOME_T, HOME_I, COMBO_END};
-const uint16_t PROGMEM cmd_shift_e[] = {HOME_S, HOME_T, HOME_E, COMBO_END};
+// const uint16_t PROGMEM cmd_shift_i[] = {HOME_S, HOME_T, HOME_I, COMBO_END};
+// const uint16_t PROGMEM cmd_shift_e[] = {HOME_S, HOME_T, HOME_E, COMBO_END};
 combo_t key_combos[] = {
-    COMBO(cmd_shift_i, LSFT(LGUI(KC_I))),
-    COMBO(cmd_shift_e, LSFT(LGUI(KC_E))),
+//     COMBO(cmd_shift_i, LSFT(LGUI(KC_I))),
+//     COMBO(cmd_shift_e, LSFT(LGUI(KC_E))),
 };
 /* end of combos */
 
@@ -272,16 +272,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
             // when keycode SW_LANG is pressed
             register_code(KC_LCTL);
-            register_code(KC_SPC);
         } else {
-            // when keycode SW_LANG is released
-            unregister_code(KC_SPC);
+            tap_code(KC_SPC);
             unregister_code(KC_LCTL);
             if (biton32(default_layer_state) == _COLEMAK) {
-                gpio_write_pin(LED_PIN, 1);
+                // gpio_write_pin(LED_PIN, 1);
                 set_single_persistent_default_layer(_QWERTY);
             } else {
-                gpio_write_pin(LED_PIN, 0);
+                // gpio_write_pin(LED_PIN, 0);
                 set_single_persistent_default_layer(_COLEMAK);
             }
         }
@@ -305,21 +303,43 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         unregister_code(KC_LGUI);
         in_cmd_tab = false;
     }
-    // based on https://github.com/qmk/qmk_firmware/issues/6394#issuecomment-525198243
-    if (
+   if (
       ( layer_state_cmp(state, _SYM) && layer_state_cmp(state, _NAV ) ) ||
       ( layer_state_cmp(state, _SYM_RU) && layer_state_cmp(state, _NAV ) )
     ) {
-        return state | (1UL<<_THIRD);
+        state |= (1UL<<_THIRD);
     } else {
-        return state & ~(1UL<<_THIRD);
+        state &= ~(1UL<<_THIRD);
     }
+    // # todo rework to led_update_user
+    // # see https://docs.qmk.fm/features/rgblight#lighting-layers
+    switch (get_highest_layer(state)) {
+        case _THIRD:
+        case _THIRD_RU:
+            rgblight_sethsv_noeeprom(HSV_GREEN);
+            break;
+        case _NAV:
+            rgblight_sethsv_noeeprom(HSV_RED);
+            break;
+        case _SYM:
+            rgblight_sethsv_noeeprom(HSV_BLUE);
+            break;
+        // case _SYM_RU:
+        //     rgblight_sethsv_noeeprom(HSV_CYAN);
+        //     break;
+        default:
+            rgblight_sethsv_noeeprom(HSV_WHITE);
+            break;
+    }
+
     return state;
 }
 
 void keyboard_post_init_user(void) {
     set_single_persistent_default_layer(_COLEMAK);
-    gpio_set_pin_output(LED_PIN);
+    rgblight_enable_noeeprom();
+    rgblight_sethsv_noeeprom(HSV_WHITE);  // Start with base layer color
+    // gpio_set_pin_output(LED_PIN);
     // debug_matrix=true;
     debug_keyboard=true;
 }

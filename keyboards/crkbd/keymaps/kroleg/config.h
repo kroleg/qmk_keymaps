@@ -28,3 +28,12 @@
 // - try to rename keeb without copying /workspaces/qmk_firmware/keyboards/crkbd/info.json
 // - checkout autocorrect https://docs.qmk.fm/#/ChangeLog/20221126?id=autocorrect
 // - check "Standardised the lower/raise/adjust layer change pattern with explicit keycodes and configurable target layers" in https://docs.qmk.fm/#/ChangeLog/20230226
+
+#define RGB_DI_PIN 16        // For QMK RGB system
+#define WS2812_DI_PIN GP16   // For low-level ChibiOS driver
+// #define RGBLED_NUM 1
+// #define RGBLIGHT_LED_COUNT RGBLED_NUM
+#define RGBLIGHT_LIMIT_VAL 120  // Limit brightness (0-255)
+#define RGBLIGHT_SLEEP      // Turns off RGB when USB suspended
+#define RGBLIGHT_DISABLE_HUE_SHIFT
+#define WS2812_BYTE_ORDER WS2812_BYTE_ORDER_RGB
