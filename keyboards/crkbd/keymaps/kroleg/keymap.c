@@ -33,6 +33,13 @@ enum layer_number {
 
 #define LED_PIN D5
 
+// short OSMs
+#define OSM_LALT OSM(MOD_LALT)
+#define OSM_LCTL OSM(MOD_LCTL)
+#define OSM_LSFT OSM(MOD_LSFT)
+#define OSM_LGUI OSM(MOD_LGUI)
+#define OSM_HYPR OSM(MOD_HYPR)
+
 // short names to fit in keymap table
 #define SFT_SPC LSFT_T(KC_SPC)
 #define SFT_TAB LSFT(KC_TAB)
@@ -51,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_LBRC, KC_P,
 		HOME_A,  QH_S,    QH_D,    QH_F,    KC_G,        KC_H,    QH_J,    QH_K,    QH_L,    QH_SCLN,
 		KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M,    KC_COMM, KC_DOT,  XXXXXXX,
-                          KC_TAB,  MO(_SYM_RU), KC_ENT,  SFT_SPC, MO(_NAV), OSM(MOD_HYPR)
+                          KC_TAB,  MO(_SYM_RU), KC_ENT,  SFT_SPC, MO(_NAV), OSM_HYPR
 	),
     [_COLEMAK] = LAYOUT_split_3x5_3(
 		KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,    KC_L,    KC_U,    KC_Y,    XXXXXXX,
@@ -73,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	),
 	[_NAV] = LAYOUT_split_3x5_3(
 		KC_DOT,  KC_4,    KC_3,    KC_2,    KC_1,        XXXXXXX, KC_HOME, KC_UP,   KC_END,  XXXXXXX,
-		KC_LCTL, KC_LALT, KC_LSFT, KC_LGUI, KC_0,        CMDTAB,  KC_LEFT, KC_DOWN, KC_RGHT, KC_ESC,
+		OSM_LCTL,OSM_LALT,OSM_LSFT,OSM_LGUI,KC_0,        CMDTAB,  KC_LEFT, KC_DOWN, KC_RGHT, KC_ESC,
 		KC_9,    KC_8,    KC_7,    KC_6,    KC_5,        XXXXXXX, SFT_TAB, KC_BSPC, KC_TAB,  XXXXXXX,
 		                  _______, _______, _______,     _______, _______, _______
 	),
