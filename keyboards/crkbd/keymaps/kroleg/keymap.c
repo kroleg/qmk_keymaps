@@ -55,13 +55,13 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_QWERTY] = LAYOUT_split_3x5_3(
-		KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_LBRC, XXXXXXX,
+		KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_LBRC, KC_F4,
 		HOME_A,  QH_S,    QH_D,    QH_F,    KC_G,        KC_H,    QH_J,    QH_K,    QH_L,    QH_SCLN,
 		KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_P,
                           KC_TAB,  MO(_SYM_RU), KC_ENT,  SFT_SPC, MO(_NAV), OSM_HYPR
 	),
     [_COLEMAK] = LAYOUT_split_3x5_3(
-		KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,    KC_L,    KC_U,    KC_Y,    XXXXXXX,
+		KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,    KC_L,    KC_U,    KC_Y,    _______,
 		HOME_A,  HOME_R,  HOME_S,  HOME_T,  KC_G,        KC_M,    HOME_N,  HOME_E,  HOME_I,  HOME_O,
 		KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,        KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_EXLM,
                           _______, MO(_SYM), _______,    _______,  _______, _______
